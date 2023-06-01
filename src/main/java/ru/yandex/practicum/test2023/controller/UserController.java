@@ -16,7 +16,7 @@ public class UserController {
     private int idGenerator = 1;
 
     @PostMapping
-    public User register(@RequestBody User user) {
+    public User createUser(@RequestBody User user) {
         user.setId(idGenerator++);
         users.add(user);
         log.info("Создали пользователя lastname: {}, c id: {}", user.getFirstName(), user.getId());
@@ -32,5 +32,16 @@ public class UserController {
     public void delUsers() {
         users.clear();
     }
+
+    @DeleteMapping("/{id}")
+    public void delUserById(@PathVariable("id") int idUser) {
+        if (users.size() >= idUser) {
+            log.info("Удалили пользователя с именем: {}, и id: {}", users.get(idUser).getFirstName(), users.get(idUser).getId());
+            users.remove(idUser-1);
+        } else {
+            log.info("Пользователь с id = {} не найден", idUser);
+        }
+    }
+
 
 }
