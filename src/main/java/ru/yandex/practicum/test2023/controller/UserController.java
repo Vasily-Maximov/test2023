@@ -25,6 +25,11 @@ public class UserController {
 
     @RequestMapping
     public  List<User> getAllUsers() {
+        if (users.size() > 0) {
+            log.info("Вывели всех пользователей");
+        } else {
+            log.info("Пользователей в списке нет");
+        }
         return users;
     }
 
