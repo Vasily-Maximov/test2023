@@ -25,12 +25,20 @@ public class UserController {
 
     @RequestMapping
     public  List<User> getAllUsers() {
+        log.info("Получили всех пользователей");
         return users;
     }
 
     @DeleteMapping()
     public void delUsers() {
+        log.info("Удалили всех пользователей");
         users.clear();
+    }
+
+    @RequestMapping("/{id}")
+    public User getById(@PathVariable("id") int idUser) {
+        log.info("Получили пользователя с id = {} ", idUser);
+        return users.get(idUser);
     }
 
 }
