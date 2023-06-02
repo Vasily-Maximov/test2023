@@ -32,4 +32,14 @@ public class DirectorController {
     public void delUsers() {
         directors.clear();
     }
+
+    @DeleteMapping("/{id}")
+    public void delDirectorById(@PathVariable("id") int idUser) {
+        if (directors.size() >= idUser) {
+            log.info("Удалили директора с именем: {}, и id: {}", directors.get(idUser).getFirstName(), directors.get(idUser).getId());
+            directors.remove(idUser-1);
+        } else {
+            log.info("Директор с id = {} не найден", idUser);
+        }
+    }
 }
