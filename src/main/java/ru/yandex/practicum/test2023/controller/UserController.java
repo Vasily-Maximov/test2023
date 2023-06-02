@@ -1,12 +1,7 @@
 package ru.yandex.practicum.test2023.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 import ru.yandex.practicum.test2023.model.User;
 
 import java.util.ArrayList;
@@ -58,6 +53,16 @@ public class UserController {
         } else {
             log.info("Пользователь с id = {} не найден", idUser);
         }
+    }
+
+    @PutMapping
+    public User updateById(@RequestBody User userNew) {
+        log.info("Изменили пользователя с id = {} ", userNew.getId());
+        User user = users.get(userNew.getId() -1);
+        user.setFirstName(userNew.getFirstName());
+        user.setLastName(userNew.getLastName());
+        user.setAge(userNew.getAge());
+        return users.get(userNew.getId()-1);
     }
 
 
